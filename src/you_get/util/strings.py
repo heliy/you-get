@@ -21,8 +21,11 @@ except ImportError:
 
 from .fs import legitimize
 
+def filter_filename(string):
+    return "".join(s for s in string if s.isalpha() or s.isdigit() or s in [' ', "."])
+
 def get_filename(htmlstring):
-    return legitimize(unescape_html(htmlstring))
+    return filter_filename(unescape_html(htmlstring))
 
 def parameterize(string):
     return "'%s'" % string.replace("'", r"'\''")
